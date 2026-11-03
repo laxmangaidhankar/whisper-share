@@ -1,9 +1,8 @@
 
-import  { useState } from 'react'
+import { useState } from 'react'
 import './RoomPage.css'
 
 function JoinRoom() {
-
   const queryParams = new URLSearchParams(window.location.search)
 
   const [roomKey, setRoomKey] = useState(
@@ -16,7 +15,17 @@ function JoinRoom() {
 
   const [displayName, setDisplayName] = useState('')
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
+    if (!roomKey.trim() || !accessKey.trim() || !displayName.trim()) {
+      return
+    }
+
+    document.body.classList.add('page-leaving')
+
+    // TODO: Validate room credentials and join the room through the API.
+  }
 
   return (
     <div className="room-page">
@@ -25,61 +34,59 @@ function JoinRoom() {
         <div className="room-art">
           <img
             src="/image.png"
-            alt="SoulTether village courtyard"
+            alt="WhisperShare secure file sharing"
           />
         </div>
 
         <section className="room-panel">
           <div className="room-panel-inner">
 
-            <p className="eyebrow">
-              <span className="eyebrow-line" />
-              Come, take a seat
-            </p>
-
             <h1>
               Join a <em>Room</em>
             </h1>
 
             <p className="room-panel-copy">
-              Enter the two keys shared by your host, then choose
-              the name your friends will see above your avatar.
+              Enter the Room ID and Access Key shared by your host
+              to securely access shared files.
             </p>
-
-           
 
             <form
               className="room-form"
+              onSubmit={handleSubmit}
             >
 
               <label htmlFor="room-key">
-                Room code
+                Room ID
 
                 <input
                   id="room-key"
                   name="room-key"
+                  type="text"
                   value={roomKey}
                   onChange={(e) =>
                     setRoomKey(e.target.value.toUpperCase())
                   }
-                  placeholder="e.g. CHAI-1234"
-                  maxLength={9}
+                  placeholder="Enter Room ID"
+                  maxLength={24}
+                  autoComplete="off"
                   required
                 />
               </label>
 
               <label htmlFor="access-key">
-                Access key
+                Access Key
 
                 <input
                   id="access-key"
                   name="access-key"
+                  type="password"
                   value={accessKey}
                   onChange={(e) =>
                     setAccessKey(e.target.value.toUpperCase())
                   }
-                  placeholder="e.g. 7KQ2M8PX"
+                  placeholder="Enter Access Key"
                   maxLength={8}
+                  autoComplete="off"
                   required
                 />
               </label>
@@ -90,23 +97,23 @@ function JoinRoom() {
                 <input
                   id="display-name"
                   name="display-name"
+                  type="text"
                   value={displayName}
                   onChange={(e) =>
                     setDisplayName(e.target.value)
                   }
                   placeholder="e.g. Kabir"
                   maxLength={24}
+                  autoComplete="name"
                   required
                 />
               </label>
-
-
 
               <button
                 className="button button--primary room-submit"
                 type="submit"
               >
-                Join the Katta <span>→</span>
+                Access Secure Room <span>→</span>
               </button>
 
             </form>
@@ -117,11 +124,11 @@ function JoinRoom() {
                 className="back-link room-switch-link"
                 href="/create-room"
               >
-                Want to create a room? →
+                Need a new room? Create one →
               </a>
 
               <a className="back-link" href="/">
-                ← Back to SoulTether
+                ← Back to WhisperShare
               </a>
 
             </div>

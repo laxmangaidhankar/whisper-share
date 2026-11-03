@@ -1,0 +1,254 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+/* Global Links */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Main Site */
+.site {
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: clip;
+}
+
+main {
+    width: 100%;
+    scroll-snap-type: y proximity;
+}
+
+/* Header */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/* Section Scroll */
+.hero,
+.features,
+.how,
+.about {
+    scroll-snap-align: start;
+}
+
+[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Typography */
+.eyebrow {
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+h1 em,
+h2 em {
+    color: var(--accent);
+    font-style: normal;
+}
+
+h2 {
+    color: var(--white);
+    font-size: clamp(42px, 6vw, 82px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+}
+
+/* Buttons */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 54px;
+    border-radius: 28px;
+    padding: 0 28px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button--primary {
+    min-width: 175px;
+    background: var(--white);
+    color: var(--ink);
+}
+
+.button--secondary {
+    min-width: 190px;
+    color: var(--white);
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.button--primary span {
+    font-size: 15px;
+}
+
+/* Feature Icons */
+.feature-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Section Description */
+.section-lede {
+    max-width: 680px;
+    margin: 25px 0 0;
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+/* Animations */
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes page-exit {
+    to {
+        opacity: 0;
+        transform: scale(0.985);
+    }
+}
+
+/* Page Transitions */
+.room-page {
+    animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.page-leaving {
+    animation: page-exit 0.26s ease both;
+}
+
+/* Hero Animations */
+.hero-content,
+.hero-skills {
+    animation: rise-in 0.8s ease both;
+}
+
+.hero-skills {
+    animation-delay: 0.18s;
+}
+
+/* Interactive Cards */
+.feature-card,
+.step {
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+    .page-shell {
+        width: min(100% - 40px, 680px);
+    }
+
+    main {
+        scroll-snap-type: y proximity;
+    }
+
+    h2 {
+        font-size: clamp(38px, 7vw, 60px);
+        letter-spacing: -0.035em;
+    }
+
+    .section-lede {
+        font-size: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+    [id] {
+        scroll-margin-top: 80px;
+    }
+
+    h2 {
+        font-size: clamp(36px, 10vw, 48px);
+        letter-spacing: -0.035em;
+    }
+
+    .section-lede {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .button {
+        min-height: 50px;
+        padding: 0 22px;
+        font-size: 11px;
+    }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    main {
+        scroll-snap-type: none;
+    }
+}
