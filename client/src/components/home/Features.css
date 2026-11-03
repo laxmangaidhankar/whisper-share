@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     padding: clamp(100px, 12vw, 160px) 0;
-    background: var(--ink);
+    background: var(--ink);padding: 10%;
 }
 
 /* Section heading */
@@ -90,6 +90,11 @@
     .feature-card h3 {
         font-size: 19px;
     }
+}
+.features .page-shell {
+    width: 80%;
+    max-width: 1600px;
+    margin-inline: auto;
 }
 
 /* Tablet */
