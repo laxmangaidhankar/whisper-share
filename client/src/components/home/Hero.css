@@ -1,0 +1,251 @@
+
+.hero {
+    position: relative;
+    min-height: min(900px, calc(100svh - 100px));
+    height: calc(100svh - 100px);
+    max-height: 1100px;
+    overflow: hidden;
+    background: var(--ink);
+    isolation: isolate;
+}
+
+.hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    content: '';
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 50% 45%,
+        rgba(255, 100, 36, .045),
+        transparent 40%
+    );
+}
+
+.hero-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: rgba(255, 255, 255, .025);
+    font: 700 clamp(120px, 23vw, 360px)/.8 'Space Grotesk', sans-serif;
+    letter-spacing: -.1em;
+    text-align: center;
+    white-space: nowrap;
+    transform: translate(-50%, -42%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: clamp(150px, 25vh, 280px) 60px 80px;
+}
+
+.hero .eyebrow {
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    margin: 0 0 28px;
+    color: var(--white);
+    font-size: clamp(64px, 8.5vw, 142px);
+    line-height: .9;
+    letter-spacing: -.065em;
+    overflow-wrap: break-word;
+}
+
+.hero-copy {
+    max-width: 480px;
+    margin-bottom: 34px;
+    color: #8b8b94;
+    font-size: 18px;
+    line-height: 1.55;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Feature list */
+.hero-skills {
+    position: absolute;
+    z-index: 1;
+    top: 37%;
+    right: max(60px, calc((100% - 1680px) / 2));
+    display: grid;
+    gap: 30px;
+    width: min(420px, 30%);
+    color: #777780;
+    font: 600 clamp(17px, 1.8vw, 28px) 'Space Grotesk', sans-serif;
+    text-align: center;
+}
+
+.hero-skills strong {
+    color: var(--white);
+}
+
+.scroll-cue {
+    position: absolute;
+    z-index: 2;
+    bottom: 12px;
+    left: 50%;
+    color: #45454c;
+    font-size: 25px;
+    transform: translateX(-50%);
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+    .hero-content {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .hero-skills {
+        right: 35px;
+        width: 30%;
+        gap: 24px;
+    }
+
+    .hero h1 {
+        font-size: clamp(65px, 8vw, 105px);
+    }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .hero {
+        height: auto;
+        min-height: calc(100svh - 80px);
+        max-height: none;
+    }
+
+    .hero-content {
+        padding: clamp(120px, 18vh, 180px) 32px 35px;
+    }
+
+    .hero h1 {
+        font-size: clamp(64px, 10vw, 95px);
+        letter-spacing: -.055em;
+    }
+
+    .hero-skills {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: auto;
+        margin: 45px 32px 70px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px;
+        text-align: left;
+        font-size: 13px;
+    }
+
+    .hero-skills > * {
+        padding: 9px 12px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 4px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .hero {
+        min-height: calc(100svh - 70px);
+    }
+
+    .hero-content {
+        padding: 100px 24px 25px;
+    }
+     .hero-skills {
+        display: none;
+    }
+
+    .hero .eyebrow {
+        margin-bottom: 14px;
+        font-size: 11px;
+        letter-spacing: .12em;
+    }
+
+    .hero h1 {
+        margin-bottom: 22px;
+        font-size: clamp(48px, 11vw, 68px);
+        line-height: .95;
+        letter-spacing: -.055em;
+    }
+
+    .hero-copy {
+        max-width: 390px;
+        margin-bottom: 26px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .hero-copy br {
+        display: none;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        max-width: 340px;
+        gap: 12px;
+    }
+
+    .hero-actions .button {
+        justify-content: center;
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .hero-watermark {
+        top: 34%;
+        font-size: 22vw;
+        letter-spacing: -.09em;
+    }
+
+
+
+    .scroll-cue {
+        bottom: 8px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+    .hero-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero-skills {
+        margin-right: 18px;
+        margin-left: 18px;
+        font-size: 9px;
+    }
+
+    .hero-skills > * {
+        padding: 7px 3px;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .hero,
+    .hero * {
+        scroll-behavior: auto;
+        animation: none !important;
+        transition: none !important;
+    }
+}

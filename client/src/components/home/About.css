@@ -1,0 +1,131 @@
+.about {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: clamp(100px, 12vw, 160px) 0;
+    background: var(--ink);
+}
+
+.about-inner {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 60px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: center;
+}
+
+/* Heading */
+.about h2 {
+    margin: 0;
+}
+
+/* Description */
+.about-copy > p {
+    max-width: 650px;
+    margin: 0 0 48px;
+    color: var(--muted);
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+/* Statistics */
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.about-stats div {
+    display: grid;
+    gap: 10px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.about-stats div:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.about-stats strong {
+    color: var(--accent);
+    font: 600 28px 'Space Grotesk', sans-serif;
+}
+
+.about-stats span {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+    .about-inner {
+        padding: 0 30px;
+        gap: 65px;
+    }
+
+    .about-copy > p {
+        font-size: 17px;
+    }
+
+    .about-stats {
+        gap: 18px;
+    }
+
+    .about-stats strong {
+        font-size: 24px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 850px) {
+    .about {
+        min-height: auto;
+        padding: 120px 0;
+    }
+
+    .about-inner {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .about-copy > p {
+        max-width: 750px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+    .about {
+        padding: 90px 0;
+    }
+
+    .about-inner {
+        padding: 0 18px;
+        gap: 35px;
+    }
+
+    .about-copy > p {
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .about-stats strong {
+        font-size: 21px;
+    }
+
+    .about-stats span {
+        font-size: 12px;
+    }
+}
