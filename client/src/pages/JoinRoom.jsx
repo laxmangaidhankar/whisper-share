@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import './RoomPage.css'
+import { getRoomFromStorage, redirectTo } from '../utils/room'
 
 function JoinRoom() {
   const queryParams = new URLSearchParams(window.location.search)
@@ -14,17 +15,34 @@ function JoinRoom() {
   )
 
   const [displayName, setDisplayName] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
     if (!roomKey.trim() || !accessKey.trim() || !displayName.trim()) {
+      setError('Enter your name, Room ID, and Access Key to continue.')
       return
     }
 
-    document.body.classList.add('page-leaving')
+    const room = getRoomFromStorage()
+    const normalizedRoomKey = roomKey.trim().toUpperCase()
+    const normalizedAccessKey = accessKey.trim().toUpperCase()
 
-    // TODO: Validate room credentials and join the room through the API.
+    if (
+      !room ||
+      room.roomCode !== normalizedRoomKey ||
+      room.accessKey !== normalizedAccessKey
+    ) {
+      setError('Those room credentials are not valid. Check them and try again.')
+      return
+    }
+
+    setError('')
+    document.body.classList.add('page-leaving')
+    redirectTo(
+      `/room?room=${encodeURIComponent(normalizedRoomKey)}&key=${encodeURIComponent(normalizedAccessKey)}&name=${encodeURIComponent(displayName.trim())}`
+    )
   }
 
   return (
@@ -115,6 +133,8 @@ function JoinRoom() {
               >
                 Access Secure Room <span>→</span>
               </button>
+
+              {error && <p className="room-error" role="alert">{error}</p>}
 
             </form>
 

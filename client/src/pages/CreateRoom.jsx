@@ -1,5 +1,6 @@
 
 import './RoomPage.css'
+import { createRoomCredentials, ROOM_STORAGE_KEY, redirectTo } from '../utils/room'
 
 function CreateRoom() {
   return (
@@ -27,16 +28,40 @@ function CreateRoom() {
 
                 if (!name) return
 
-                document.body.classList.add('page-leaving')
+                const roomName = formData.get('room-name')?.trim()
+                if (!roomName) return
 
-                // TODO: Call the create-room API
+                const { roomCode, accessKey } = createRoomCredentials()
+                localStorage.setItem(
+                  ROOM_STORAGE_KEY,
+                  JSON.stringify({ roomCode, accessKey, roomName, hostName: name })
+                )
+
+                document.body.classList.add('page-leaving')
+                redirectTo(
+                  `/dashboard?room=${encodeURIComponent(roomCode)}&key=${encodeURIComponent(accessKey)}`
+                )
               }}
             >
+              
               <label htmlFor="display-name">
-                Room name
+                Your name
                 <input
                   id="display-name"
                   name="display-name"
+                  type="text"
+                  placeholder="e.g. Alex"
+                  maxLength={24}
+                  autoComplete="name"
+                  required
+                />
+              </label>
+
+              <label htmlFor="room-name">
+                Room name
+                <input
+                  id="room-name"
+                  name="room-name"
                   type="text"
                   placeholder="e.g. Scholarship Documents"
                   maxLength={24}

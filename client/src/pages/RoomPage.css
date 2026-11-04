@@ -73,14 +73,14 @@
 .room-art img {
     position: absolute;
     top: 0;
-    left: -11.83%;
-    width: 111.83%;
+    left: -2.83%;
+    width: 131.83%;
     height: 100%;
 
     object-fit: cover;
     object-position: center;
 
-    opacity: .45;
+    opacity: .15;
     filter: grayscale(1) contrast(1.1);
 }
 
