@@ -1,6 +1,11 @@
+
+import { useState } from 'react'
 import './Hero.css'
 
 function Hero() {
+  const [showAccess, setShowAccess] = useState(false)
+  const [accessCode, setAccessCode] = useState('')
+
   const navigateToRoom = (event, path) => {
     event.preventDefault()
     document.body.classList.add('page-leaving')
@@ -16,6 +21,23 @@ function Hero() {
     window.setTimeout(() => {
       window.location.href = '/instant-share'
     }, 260)
+  }
+
+  const handleCodeChange = (event) => {
+    setAccessCode(
+      event.target.value
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, '')
+        .slice(0, 6)
+    )
+  }
+
+  const handleAccessSubmit = (event) => {
+    event.preventDefault()
+
+    if (accessCode.length !== 6) return
+
+    window.location.href = `/access-file?code=${accessCode}`
   }
 
   return (
@@ -59,44 +81,103 @@ function Hero() {
           </div>
         </div>
 
-        {/* RIGHT SIDE - INSTANT SHARE */}
+        {/* RIGHT SIDE */}
         <div className="hero-upload">
-          <div className="upload-card">
 
-            <div className="upload-card-header">
-              <span className="upload-icon">↗</span>
-              <div>
-                <h3>Instant Share</h3>
-                <p>One file. One code. Complete privacy.</p>
+          {!showAccess ? (
+            <>
+              <div className="upload-card">
+
+                <div className="upload-card-header">
+                  <span className="upload-icon">↗</span>
+                  <div>
+                    <h3>Instant Share</h3>
+                    <p>One file. One code. Complete privacy.</p>
+                  </div>
+                </div>
+
+                <button
+                  className="upload-dropzone"
+                  type="button"
+                  onClick={navigateToUpload}
+                >
+                  <span className="upload-cloud">↑</span>
+                  <strong>Upload your file</strong>
+                  <span>
+                    Click to select a file and share it instantly
+                  </span>
+                </button>
+
               </div>
-            </div>
 
-            <button
-              className="upload-dropzone"
-              type="button"
-              onClick={navigateToUpload}
-            >
-              <span className="upload-cloud">↑</span>
+              <a
+                href="#access-file"
+                className="access-code-link"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setShowAccess(true)
+                }}
+              >
+                Already have a code? <strong>Access your file →</strong>
+              </a>
+            </>
+          ) : (
+            <>
+              <div className="upload-card access-card">
 
-              <strong>Upload your file</strong>
+                <div className="upload-card-header">
+                  <span className="upload-icon">↗</span>
+                  <div>
+                    <h3>Access Your File</h3>
+                    <p>Enter the 6-character code to continue.</p>
+                  </div>
+                </div>
 
-              <span>
-                Click to select a file and share it instantly
-              </span>
-            </button>
+                <form
+                  className="access-form"
+                  onSubmit={handleAccessSubmit}
+                >
+                  <label htmlFor="access-code">
+                    FILE ACCESS CODE
+                  </label>
 
+                  <input
+                    id="access-code"
+                    type="text"
+                    value={accessCode}
+                    onChange={handleCodeChange}
+                    placeholder="ABC123"
+                    maxLength={6}
+                    autoComplete="off"
+                    autoFocus
+                    required
+                  />
 
-          </div>
+                  <button
+                    className="access-submit"
+                    type="submit"
+                    disabled={accessCode.length !== 6}
+                  >
+                    Access File <span>→</span>
+                  </button>
+                </form>
 
-          <a
-            href="/access-file"
-            className="access-code-link"
-            onClick={(event) => navigateToRoom(event, '/access-file')}
-          >
-            Already have a code? <strong>Access your file →</strong>
-          </a>
+              </div>
+
+              <button
+                className="access-code-link access-back"
+                type="button"
+                onClick={() => {
+                  setShowAccess(false)
+                  setAccessCode('')
+                }}
+              >
+                ← Back to Instant Share
+              </button>
+            </>
+          )}
+
         </div>
-
       </div>
 
       <div className="scroll-cue" aria-hidden="true">

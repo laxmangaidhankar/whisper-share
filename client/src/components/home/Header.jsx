@@ -1,21 +1,22 @@
 
 import { Logo } from './Ui'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { getTheme, setTheme } from '../../utils/theme'
+
 import './Header.css'
 
 function Header() {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem('whispershare-theme') || 'dark'
-  )
-
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('whispershare-theme', theme)
-  }, [theme])
+  const [theme, setCurrentTheme] = useState(getTheme)
 
   const closeMenu = () => setMenuOpen(false)
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+
+    setTheme(newTheme)
+    setCurrentTheme(newTheme)
+  }
 
   return (
     <header className="site-header">
@@ -34,10 +35,11 @@ function Header() {
         </nav>
 
         <div className="header-controls">
+
           <button
             type="button"
             className="theme-toggle"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           >
             <span aria-hidden="true">
@@ -56,8 +58,8 @@ function Header() {
           >
             <span>{menuOpen ? '✕' : '☰'}</span>
           </button>
-        </div>
 
+        </div>
       </div>
     </header>
   )
