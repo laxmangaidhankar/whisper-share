@@ -1,11 +1,7 @@
 
-import { useState } from 'react'
 import './Hero.css'
 
 function Hero() {
-  const [showAccess, setShowAccess] = useState(false)
-  const [accessCode, setAccessCode] = useState('')
-
   const navigateToRoom = (event, path) => {
     event.preventDefault()
     document.body.classList.add('page-leaving')
@@ -13,31 +9,6 @@ function Hero() {
     window.setTimeout(() => {
       window.location.href = path
     }, 260)
-  }
-
-  const navigateToUpload = () => {
-    document.body.classList.add('page-leaving')
-
-    window.setTimeout(() => {
-      window.location.href = '/instant-share'
-    }, 260)
-  }
-
-  const handleCodeChange = (event) => {
-    setAccessCode(
-      event.target.value
-        .toUpperCase()
-        .replace(/[^A-Z0-9]/g, '')
-        .slice(0, 6)
-    )
-  }
-
-  const handleAccessSubmit = (event) => {
-    event.preventDefault()
-
-    if (accessCode.length !== 6) return
-
-    window.location.href = `/access-file?code=${accessCode}`
   }
 
   return (
@@ -83,100 +54,21 @@ function Hero() {
 
         {/* RIGHT SIDE */}
         <div className="hero-upload">
-
-          {!showAccess ? (
-            <>
-              <div className="upload-card">
-
-                <div className="upload-card-header">
-                  <span className="upload-icon">↗</span>
-                  <div>
-                    <h3>Instant Share</h3>
-                    <p>One file. One code. Complete privacy.</p>
-                  </div>
-                </div>
-
-                <button
-                  className="upload-dropzone"
-                  type="button"
-                  onClick={navigateToUpload}
-                >
-                  <span className="upload-cloud">↑</span>
-                  <strong>Upload your file</strong>
-                  <span>
-                    Click to select a file and share it instantly
-                  </span>
-                </button>
-
+          <a className="instant-share-panel" href="/instant-upload">
+            <div className="instant-share-heading">
+              <div>
+                <h2>Instant Share</h2>
+                <p>One file. One code. Complete privacy.</p>
               </div>
+            </div>
 
-              <a
-                href="#access-file"
-                className="access-code-link"
-                onClick={(event) => {
-                  event.preventDefault()
-                  setShowAccess(true)
-                }}
-              >
-                Already have a code? <strong>Access your file →</strong>
-              </a>
-            </>
-          ) : (
-            <>
-              <div className="upload-card access-card">
+            <div className="instant-share-center">
+              <span className="big-arrow">→</span>
+            </div>
 
-                <div className="upload-card-header">
-                  <span className="upload-icon">↗</span>
-                  <div>
-                    <h3>Access Your File</h3>
-                    <p>Enter the 6-character code to continue.</p>
-                  </div>
-                </div>
-
-                <form
-                  className="access-form"
-                  onSubmit={handleAccessSubmit}
-                >
-                  <label htmlFor="access-code">
-                    FILE ACCESS CODE
-                  </label>
-
-                  <input
-                    id="access-code"
-                    type="text"
-                    value={accessCode}
-                    onChange={handleCodeChange}
-                    placeholder="ABC123"
-                    maxLength={6}
-                    autoComplete="off"
-                    autoFocus
-                    required
-                  />
-
-                  <button
-                    className="access-submit"
-                    type="submit"
-                    disabled={accessCode.length !== 6}
-                  >
-                    Access File <span>→</span>
-                  </button>
-                </form>
-
-              </div>
-
-              <button
-                className="access-code-link access-back"
-                type="button"
-                onClick={() => {
-                  setShowAccess(false)
-                  setAccessCode('')
-                }}
-              >
-                ← Back to Instant Share
-              </button>
-            </>
-          )}
-
+            <div className="instant-share-bottom">
+            </div>
+          </a>
         </div>
       </div>
 
