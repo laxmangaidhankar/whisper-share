@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import JoinRoom from '../pages/JoinRoom'
 import CreateRoom from '../pages/CreateRoom'
 import LandingPage from '../pages/LandingPage'
+import InstantUpload from '../pages/InstantUpload'
 
 import WhisperShareHome from '../pages/WhisperShareHome'
 import LiveRoom from '../pages/LiveRoom'
@@ -26,6 +27,10 @@ function App() {
 
   if (currentPath === '/join-room') {
     return <JoinRoom />
+  }
+
+  if (currentPath === '/instant-upload') {
+    return <InstantUpload />
   }
 
   if(currentPath === '/dashboard'){
