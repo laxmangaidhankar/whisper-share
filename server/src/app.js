@@ -14,7 +14,7 @@ app.use(helmet());
 
 // CORS
 app.use(cors({
-    origin: env.FRONTEND_URL || "http://localhost:5173",
+    origin: env.FRONTEND_URL_PRODUCTION || "http://localhost:5173",
     methods: ["GET", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "X-Share-Token"]
 }));
