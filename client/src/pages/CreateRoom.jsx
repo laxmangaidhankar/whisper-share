@@ -1,5 +1,6 @@
 
 import './RoomPage.css'
+import {Link} from 'react-router-dom'
 import { createRoomCredentials, ROOM_STORAGE_KEY, redirectTo } from '../utils/room'
 
 function CreateRoom() {
@@ -79,13 +80,13 @@ function CreateRoom() {
             </form>
 
             <div className="room-navigation">
-              <a className="back-link room-switch-link" href="/join-room">
+              <Link className="back-link room-switch-link" to="/join-room">
                 Have a Room ID? Join a room →
-              </a>
+              </Link>
 
-              <a className="back-link" href="/">
+              <Link className="back-link" to="/">
                 ← Back to WhisperShare
-              </a>
+              </Link>
             </div>
           </div>
         </section>

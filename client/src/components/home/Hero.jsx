@@ -1,15 +1,10 @@
 
 import './Hero.css'
+import { Link } from 'react-router-dom';
+
 
 function Hero() {
-  const navigateToRoom = (event, path) => {
-    event.preventDefault()
-    document.body.classList.add('page-leaving')
 
-    window.setTimeout(() => {
-      window.location.href = path
-    }, 260)
-  }
 
   return (
     <section className="hero">
@@ -34,27 +29,30 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a
+            <Link
               className="button button--primary"
-              href="/create-room"
-              onClick={(event) => navigateToRoom(event, '/create-room')}
+              to="/create-room"
             >
               Start Sharing <span>→</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
               className="button button--secondary"
-              href="/join-room"
-              onClick={(event) => navigateToRoom(event, '/join-room')}
+              to="/join-room"
+
             >
               <span className="plus">↗</span> Access Files
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* RIGHT SIDE */}
         <div className="hero-upload">
-          <a className="instant-share-panel" href="/instant-upload">
+
+          <Link
+            className="instant-share-panel"
+            to="/instant-upload"
+          >
             <div className="instant-share-heading">
               <div>
                 <h2>Instant Share</h2>
@@ -68,7 +66,7 @@ function Hero() {
 
             <div className="instant-share-bottom">
             </div>
-          </a>
+          </Link>
         </div>
       </div>
 

@@ -372,6 +372,95 @@
     font-size: 12px;
 }
 
+.instant-share-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 14px 16px;
+    border: 1px solid;
+    border-radius: 12px;
+    text-align: left;
+    animation: message-in 0.3s ease both;
+}
+
+.instant-share-message-icon {
+    display: grid;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.instant-share-message strong,
+.instant-share-message p,
+.instant-share-message small {
+    display: block;
+}
+
+.instant-share-message strong {
+    color: var(--white);
+    font-size: 13px;
+}
+
+.instant-share-message p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.instant-share-message--error {
+    border-color: rgba(255, 91, 91, 0.35);
+    background: rgba(255, 91, 91, 0.08);
+}
+
+.instant-share-message--error .instant-share-message-icon {
+    background: rgba(255, 91, 91, 0.18);
+    color: #ff8585;
+}
+
+.instant-share-message--success {
+    border-color: rgba(91, 214, 154, 0.35);
+    background: rgba(91, 214, 154, 0.08);
+}
+
+.instant-share-message--success .instant-share-message-icon {
+    background: rgba(91, 214, 154, 0.18);
+    color: #72e0aa;
+}
+
+.instant-share-file-name {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.instant-share-save-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 11px;
+    color: #72e0aa;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.instant-share-save-link:hover {
+    text-decoration: underline;
+}
+
+.instant-share-message small {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
 .upload-again {
     margin-top: 20px;
     border: 0;
@@ -418,6 +507,18 @@
 
     to {
         transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes message-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -498,7 +599,8 @@
 @media (prefers-reduced-motion: reduce) {
     .upload-success,
     .success-check,
-    .success-orbit {
+    .success-orbit,
+    .instant-share-message {
         animation: none;
     }
 }

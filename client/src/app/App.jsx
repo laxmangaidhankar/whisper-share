@@ -1,54 +1,38 @@
-import { useState, useEffect } from 'react'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
 
-import JoinRoom from '../pages/JoinRoom'
-import CreateRoom from '../pages/CreateRoom'
-import LandingPage from '../pages/LandingPage'
-import InstantUpload from '../pages/InstantUpload'
+import JoinRoom from '../pages/JoinRoom';
+import CreateRoom from '../pages/CreateRoom';
+import LandingPage from '../pages/LandingPage';
+import InstantUpload from '../pages/InstantUpload';
 
-import WhisperShareHome from '../pages/WhisperShareHome'
-import LiveRoom from '../pages/LiveRoom'
-import './App.css'
+import WhisperShareHome from '../pages/WhisperShareHome';
+import LiveRoom from '../pages/LiveRoom';
+
+import './App.css';
+
 function App() {
-  const [currentPath, setCurrentPath] = useState(
-    window.location.pathname
-  )
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
 
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname)
-    }
+        <Route path="/join-room" element={<JoinRoom />} />
 
-    window.addEventListener('popstate', handlePopState)
+        <Route path="/instant-upload" element={<InstantUpload />} />
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState)
-    }
-  }, [])
+        <Route path="/dashboard" element={<WhisperShareHome />} />
 
-  if (currentPath === '/join-room') {
-    return <JoinRoom />
-  }
+        <Route path="/room" element={<LiveRoom />} />
 
-  if (currentPath === '/instant-upload') {
-    return <InstantUpload />
-  }
-
-  if(currentPath === '/dashboard'){
-    return <WhisperShareHome/>
-  }
-
-  if (currentPath === '/room') {
-    return <LiveRoom />
-  }
-
-  if (
-    currentPath === '/create-room' ||
-    currentPath === '/create-room/name'
-  ) {
-    return <CreateRoom />
-  }
-
-  return <LandingPage />
+        <Route path="/create-room" element={<CreateRoom />} />
+        <Route path="/create-room/name" element={<CreateRoom />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

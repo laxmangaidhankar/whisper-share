@@ -34,9 +34,9 @@ export async function fetchShareMetadata(code) {
 
 export async function claimShareContent(code, claimToken) {
   const response = await fetch(
-    `${API_BASE_URL}/instant-shares/${encodeURIComponent(code)}/content`,
+    `${API_BASE_URL}/instant-share/${encodeURIComponent(code)}/content`,
     {
-      method: 'POST',
+      method: 'GET',
       headers: { 'X-Share-Token': claimToken },
       cache: 'no-store',
     }

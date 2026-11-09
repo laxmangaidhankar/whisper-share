@@ -48,7 +48,15 @@ function UploadPanel({
           <span>{selectedFile ? selectedFile.name : 'Click to select a file; maximum 25 MiB'}</span>
         </button>
       )}
-      {errorMessage && <p role="alert">{errorMessage}</p>}
+      {errorMessage && (
+        <div className="instant-share-message instant-share-message--error" role="alert">
+          <span className="instant-share-message-icon" aria-hidden="true">!</span>
+          <div>
+            <strong>Upload could not be completed</strong>
+            <p>{errorMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

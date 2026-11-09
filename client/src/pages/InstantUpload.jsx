@@ -3,6 +3,7 @@ import Header from '../components/instant-share/Header'
 import AccessPanel from '../components/instant-share/AccessPanel'
 import UploadPanel from '../components/instant-share/UploadPanel'
 import { useInstantUpload } from '../hooks/useInstantUpload'
+import {Link} from 'react-router-dom'
 import '../components/home/Hero.css'
 import './InstantUpload.css'
 
@@ -45,7 +46,7 @@ function InstantUpload() {
     <div className="site instant-upload-page">
       <Header />
       <main className="instant-upload-main">
-        <a className="instant-upload-back" href="/">← Back to home</a>
+        <Link className="instant-upload-back" to="/">← Back to home</Link>
         <div className="instant-upload-heading">
           <span className="instant-upload-mark">↗</span>
           <div>

@@ -1,6 +1,7 @@
 
 import { useState } from 'react'
 import './RoomPage.css'
+import {Link} from 'react-router-dom'
 import { getRoomFromStorage, redirectTo } from '../utils/room'
 
 function JoinRoom() {
@@ -140,16 +141,16 @@ function JoinRoom() {
 
             <div className="room-navigation">
 
-              <a
+              <Link
                 className="back-link room-switch-link"
-                href="/create-room"
+                to="/create-room"
               >
                 Need a new room? Create one →
-              </a>
+              </Link>
 
-              <a className="back-link" href="/">
+              <Link className="back-link" to="/">
                 ← Back to WhisperShare
-              </a>
+              </Link>
 
             </div>
 

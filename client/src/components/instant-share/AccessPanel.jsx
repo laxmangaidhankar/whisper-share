@@ -41,13 +41,27 @@ function AccessPanel({
       </form>
       <p className="success-hint">The first valid access consumes the share, even if the download is interrupted.</p>
       {download && (
-        <p role="status">
-          The share was used. If the download did not start,{' '}
-          <a href={download.url} download={download.fileName}>save {download.fileName}</a>
-          {' '}before leaving this page.
-        </p>
+        <div className="instant-share-message instant-share-message--success" role="status" aria-live="polite">
+          <span className="instant-share-message-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Download ready</strong>
+            <p><span className="instant-share-file-name">{download.fileName}</span> was downloaded successfully.</p>
+            <a className="instant-share-save-link" href={download.url} download={download.fileName}>
+              Save a copy manually <span aria-hidden="true">↓</span>
+            </a>
+            <small>The share has been used and cannot be downloaded again.</small>
+          </div>
+        </div>
       )}
-      {errorMessage && <p role="alert">{errorMessage}</p>}
+      {errorMessage && (
+        <div className="instant-share-message instant-share-message--error" role="alert">
+          <span className="instant-share-message-icon" aria-hidden="true">!</span>
+          <div>
+            <strong>Could not access this file</strong>
+            <p>{errorMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
