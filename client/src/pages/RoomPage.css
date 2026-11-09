@@ -348,6 +348,44 @@
     color: var(--accent);
 }
 
+.room-notice {
+    margin: 0 0 24px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255, 100, 36, .35);
+    border-radius: 12px;
+    background: rgba(255, 100, 36, .06);
+}
+
+.room-notice strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #ff6424;
+    font-size: 14px;
+}
+
+.room-notice p {
+    margin: 0;
+    color: #a0a0a8;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.room-notice a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.room-fieldset {
+    display: contents; /* keeps your existing .room-form layout unchanged */
+    border: 0;
+}
+
+.room-fieldset:disabled input,
+.room-fieldset:disabled button {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
 /* ========================================
    LAPTOP
 ======================================== */

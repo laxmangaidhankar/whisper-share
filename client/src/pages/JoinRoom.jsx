@@ -1,8 +1,8 @@
-
 import { useState } from 'react'
 import './RoomPage.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getRoomFromStorage, redirectTo } from '../utils/room'
+import { ROOM_FEATURE_AVAILABLE } from '../config/features'
 
 function JoinRoom() {
   const queryParams = new URLSearchParams(window.location.search)
@@ -20,6 +20,7 @@ function JoinRoom() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (!ROOM_FEATURE_AVAILABLE) return
 
     if (!roomKey.trim() || !accessKey.trim() || !displayName.trim()) {
       setError('Enter your name, Room ID, and Access Key to continue.')
@@ -69,71 +70,85 @@ function JoinRoom() {
               to securely access shared files.
             </p>
 
+            {!ROOM_FEATURE_AVAILABLE && (
+              <div className="room-notice" role="status">
+                <strong>Rooms are unavailable right now</strong>
+                <p>
+                  This feature is under development. If someone shared a
+                  file code with you, you can open it with{' '}
+                  <Link to="/instant-upload">Instant Share</Link>.
+                </p>
+              </div>
+            )}
+
             <form
               className="room-form"
               onSubmit={handleSubmit}
             >
+              <fieldset className="room-fieldset" disabled={!ROOM_FEATURE_AVAILABLE}>
 
-              <label htmlFor="room-key">
-                Room ID
+                <label htmlFor="room-key">
+                  Room ID
 
-                <input
-                  id="room-key"
-                  name="room-key"
-                  type="text"
-                  value={roomKey}
-                  onChange={(e) =>
-                    setRoomKey(e.target.value.toUpperCase())
-                  }
-                  placeholder="Enter Room ID"
-                  maxLength={24}
-                  autoComplete="off"
-                  required
-                />
-              </label>
+                  <input
+                    id="room-key"
+                    name="room-key"
+                    type="text"
+                    value={roomKey}
+                    onChange={(e) =>
+                      setRoomKey(e.target.value.toUpperCase())
+                    }
+                    placeholder="Enter Room ID"
+                    maxLength={24}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
 
-              <label htmlFor="access-key">
-                Access Key
+                <label htmlFor="access-key">
+                  Access Key
 
-                <input
-                  id="access-key"
-                  name="access-key"
-                  type="password"
-                  value={accessKey}
-                  onChange={(e) =>
-                    setAccessKey(e.target.value.toUpperCase())
-                  }
-                  placeholder="Enter Access Key"
-                  maxLength={8}
-                  autoComplete="off"
-                  required
-                />
-              </label>
+                  <input
+                    id="access-key"
+                    name="access-key"
+                    type="password"
+                    value={accessKey}
+                    onChange={(e) =>
+                      setAccessKey(e.target.value.toUpperCase())
+                    }
+                    placeholder="Enter Access Key"
+                    maxLength={8}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
 
-              <label htmlFor="display-name">
-                Your name
+                <label htmlFor="display-name">
+                  Your name
 
-                <input
-                  id="display-name"
-                  name="display-name"
-                  type="text"
-                  value={displayName}
-                  onChange={(e) =>
-                    setDisplayName(e.target.value)
-                  }
-                  placeholder="e.g. Kabir"
-                  maxLength={24}
-                  autoComplete="name"
-                  required
-                />
-              </label>
+                  <input
+                    id="display-name"
+                    name="display-name"
+                    type="text"
+                    value={displayName}
+                    onChange={(e) =>
+                      setDisplayName(e.target.value)
+                    }
+                    placeholder="e.g. Kabir"
+                    maxLength={24}
+                    autoComplete="name"
+                    required
+                  />
+                </label>
 
-              <button
-                className="button button--primary room-submit"
-                type="submit"
-              >
-                Access Secure Room <span>→</span>
-              </button>
+                <button
+                  className="button button--primary room-submit"
+                  type="submit"
+                >
+                  {ROOM_FEATURE_AVAILABLE ? <>Access Secure Room <span>→</span></> : 'Coming soon'}
+                </button>
+
+              </fieldset>
 
               {error && <p className="room-error" role="alert">{error}</p>}
 

@@ -3,7 +3,6 @@ import Header from '../components/instant-share/Header'
 import AccessPanel from '../components/instant-share/AccessPanel'
 import UploadPanel from '../components/instant-share/UploadPanel'
 import { useInstantUpload } from '../hooks/useInstantUpload'
-import {Link} from 'react-router-dom'
 import '../components/home/Hero.css'
 import './InstantUpload.css'
 
@@ -46,9 +45,7 @@ function InstantUpload() {
     <div className="site instant-upload-page">
       <Header />
       <main className="instant-upload-main">
-        <Link className="instant-upload-back" to="/">← Back to home</Link>
         <div className="instant-upload-heading">
-          <span className="instant-upload-mark">↗</span>
           <div>
             <p className="eyebrow">Private file transfer</p>
             <h1>Instant Share</h1>
@@ -71,7 +68,7 @@ function InstantUpload() {
               shareCode={shareCode}
             />
             <button className="access-code-link access-back" type="button" onClick={openAccess} disabled={isLoading}>
-              Have an access code? <strong>Access your file →</strong>
+              Have an access code? <strong>Access your file</strong>
             </button>
           </>
         ) : (
@@ -85,7 +82,7 @@ function InstantUpload() {
               setEnteredCode={setEnteredCode}
             />
             <button className="access-code-link access-back" type="button" onClick={backToUpload} disabled={isLoading}>
-              ← Back to Instant Share
+             Wanted to Share? <strong>Upload File</strong>
             </button>
           </>
         )}

@@ -280,14 +280,7 @@
     animation: success-check-in 0.5s 0.15s ease both;
 }
 
-.success-orbit {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 1px solid rgba(255, 100, 36, 0.25);
-    border-radius: 50%;
-    animation: success-orbit 4s linear infinite;
-}
+
 
 .success-orbit--one {
     top: 21px;
@@ -500,16 +493,6 @@
     }
 }
 
-@keyframes success-orbit {
-    from {
-        transform: rotate(0deg) scale(1);
-    }
-
-    to {
-        transform: rotate(360deg) scale(1);
-    }
-}
-
 @keyframes message-in {
     from {
         opacity: 0;
@@ -572,6 +555,22 @@
     margin-left: auto;
     color: var(--accent);
     font-size: 22px;
+}
+
+.instant-upload-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    color: #8b8b94;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.instant-upload-back:hover,
+.instant-upload-back:focus-visible {
+    color: #ff6424;
 }
 
 @media (max-width: 600px) {

@@ -42,6 +42,20 @@
     margin-left: auto;
 }
 
+.header-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #8b8b94;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.header-back:hover,
+.header-back:focus-visible {
+    color: #ff6424;
+}
 
 /* Laptop */
 @media (max-width: 1100px) {

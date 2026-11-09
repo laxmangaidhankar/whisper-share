@@ -1,7 +1,8 @@
-
 import './RoomPage.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { ROOM_FEATURE_AVAILABLE } from '../config/features'
 import { createRoomCredentials, ROOM_STORAGE_KEY, redirectTo } from '../utils/room'
+
 
 function CreateRoom() {
   return (
@@ -19,14 +20,24 @@ function CreateRoom() {
               Set up a secure space to share your files privately.
             </p>
 
+            {!ROOM_FEATURE_AVAILABLE && (
+              <div className="room-notice" role="status">
+                <strong>Rooms are unavailable right now</strong>
+                <p>
+                  This feature is under development. In the meantime, you can
+                  send a single file with <Link to="/instant-upload">Instant Share</Link>.
+                </p>
+              </div>
+            )}
+
             <form
               className="room-form"
               onSubmit={(event) => {
                 event.preventDefault()
+                if (!ROOM_FEATURE_AVAILABLE) return
 
                 const formData = new FormData(event.currentTarget)
                 const name = formData.get('display-name')?.trim()
-
                 if (!name) return
 
                 const roomName = formData.get('room-name')?.trim()
@@ -44,39 +55,37 @@ function CreateRoom() {
                 )
               }}
             >
-              
-              <label htmlFor="display-name">
-                Your name
-                <input
-                  id="display-name"
-                  name="display-name"
-                  type="text"
-                  placeholder="e.g. Alex"
-                  maxLength={24}
-                  autoComplete="name"
-                  required
-                />
-              </label>
+              <fieldset className="room-fieldset" disabled={!ROOM_FEATURE_AVAILABLE}>
+                <label htmlFor="display-name">
+                  Your name
+                  <input
+                    id="display-name"
+                    name="display-name"
+                    type="text"
+                    placeholder="e.g. Alex"
+                    maxLength={24}
+                    autoComplete="name"
+                    required
+                  />
+                </label>
 
-              <label htmlFor="room-name">
-                Room name
-                <input
-                  id="room-name"
-                  name="room-name"
-                  type="text"
-                  placeholder="e.g. Scholarship Documents"
-                  maxLength={24}
-                  autoComplete="name"
-                  required
-                />
-              </label>
+                <label htmlFor="room-name">
+                  Room name
+                  <input
+                    id="room-name"
+                    name="room-name"
+                    type="text"
+                    placeholder="e.g. Scholarship Documents"
+                    maxLength={24}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
 
-              <button
-                className="button button--primary room-submit"
-                type="submit"
-              >
-                Create Secure Room <span>→</span>
-              </button>
+                <button className="button button--primary room-submit" type="submit">
+                  {ROOM_FEATURE_AVAILABLE ? <>Create Secure Room <span>→</span></> : 'Coming soon'}
+                </button>
+              </fieldset>
             </form>
 
             <div className="room-navigation">

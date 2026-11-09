@@ -1,5 +1,6 @@
 
 import { Logo } from './Ui'
+import {Link} from 'react-router-dom'
 import './Footer.css'
 
 function Footer() {
@@ -17,9 +18,9 @@ function Footer() {
             </h2>
           </div>
 
-          <a className="footer-cta-link" href="/create-room">
+          <Link className="footer-cta-link" to="/create-room">
             Start Sharing <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </div>
 
         {/* Footer Content */}
@@ -43,8 +44,8 @@ function Footer() {
 
             <div>
               <strong>Get Started</strong>
-              <a href="/create-room">Create a Room</a>
-              <a href="/join-room">Join a Room</a>
+              <Link to="/create-room">Create a Room</Link>
+              <Link to="/join-room">Join a Room</Link>
             </div>
 
             <div>
