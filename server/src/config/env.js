@@ -6,6 +6,7 @@ export const env = {
     PORT: Number(process.env.PORT) || 3000,
     NODE_ENV: process.env.NODE_ENV || "development",
     DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL_PRODUCTION: process.env.DATABASE_URL_PRODUCTION,
     FRONTEND_URL: process.env.FRONTEND_URL,
     FRONTEND_URL_PRODUCTION: process.env.FRONTEND_URL_PRODUCTION,
     ACCESS_CODE_HMAC_SECRET: process.env.ACCESS_CODE_HMAC_SECRET?.trim(),
